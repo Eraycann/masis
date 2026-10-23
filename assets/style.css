@@ -1166,3 +1166,6 @@ a.footer__maker:hover { opacity: 1; text-decoration: none; }
 /* Üst şeritte simgeler yazılarla aynı hizada (genel .social üst boşluğu burada yok) */
 .topbar .social { margin-top: 0; align-items: center; height: 18px; }
 .topbar .social a, .topbar .social .social__off { display: inline-flex; align-items: center; line-height: 0; }
+/* Ana sayfa üye logoları: üstüne gelince alt çizgi ve yukarı kalkma yok, yalnızca hafif gölge */
+.mlogo::after { display: none; }
+.mlogo:hover, .mlogo:focus-visible { transform: none; }
