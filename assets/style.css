@@ -1158,3 +1158,11 @@ a.footer__maker:hover { opacity: 1; text-decoration: none; }
 .footer .social a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--white); transition: background .25s, border-color .25s, color .25s; }
 .footer .social a:hover { background: var(--accent); border-color: var(--accent); color: var(--navy-950); }
 .footer .social svg { width: 17px; height: 17px; }
+
+/* Adresi girilmemiş sosyal medya simgesi: aynı görünüm, tıklanmaz */
+.footer .social .social__off { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--white); }
+.topbar .social .social__off { display: inline-flex; color: inherit; }
+.soon__social .social__off { width: 40px; height: 40px; display: grid; place-items: center; background: var(--grey-100); color: var(--navy); }
+/* Üst şeritte simgeler yazılarla aynı hizada (genel .social üst boşluğu burada yok) */
+.topbar .social { margin-top: 0; align-items: center; height: 18px; }
+.topbar .social a, .topbar .social .social__off { display: inline-flex; align-items: center; line-height: 0; }
