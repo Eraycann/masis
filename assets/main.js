@@ -362,3 +362,26 @@ $$('.members-sec__ridges').forEach(cv => {
   }).observe(sec);
 });
 
+/* Çerez onayı: seçim tarayıcıda saklanır. "Kabul et" olmadan çerez kullanan dış içerik (Google Haritalar) yüklenmez. */
+(() => {
+  const KEY = 'masis.cookie';
+  const bar = document.querySelector('.cookie-bar');
+  const get = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  const set = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
+  const loadMaps = () => document.querySelectorAll('.map-card--off[data-map-src]').forEach(card => {
+    const f = document.createElement('iframe');
+    f.src = card.dataset.mapSrc; f.title = card.dataset.mapTitle || 'Harita';
+    f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true; f.loading = 'lazy';
+    card.classList.remove('map-card--off'); card.replaceChildren(f);
+  });
+  const show = () => { if (bar) bar.hidden = false; };
+  if (get() === '1') loadMaps();
+  else if (get() === null) show();
+  if (bar) bar.querySelectorAll('[data-cookie]').forEach(b => b.addEventListener('click', () => {
+    const prev = get();
+    set(b.dataset.cookie); bar.hidden = true;
+    if (b.dataset.cookie === '1') loadMaps();
+    else if (prev === '1' && document.querySelector('.map-card iframe')) location.reload(); // önceden yüklenen harita kalksın
+  }));
+  document.querySelectorAll('[data-cookie-prefs]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(); }));
+})();

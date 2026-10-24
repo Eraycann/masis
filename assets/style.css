@@ -1140,7 +1140,7 @@ a.footer__maker:hover { opacity: 1; text-decoration: none; }
 /* Yazısız (kendi kapağı olan) yayınlar: PDF kapağı kırpılmadan, A4 oranında */
 .report__cover--plain { aspect-ratio: 1 / 1.414; }
 .report__cover--plain img { object-fit: contain; }
-.legal-text { max-width: 860px; }
+.legal-text { max-width: none; }
 /* ---------- Üyelik: firma kartları eşit — logo kutusu sabit yükseklikte, logo içine sığar; ad 2 satırlık yerde, bağlantı en altta ---------- */
 .grid--members { align-items: stretch; }
 .grid--members .card { display: flex; flex-direction: column; text-align: center; }
@@ -1169,3 +1169,76 @@ a.footer__maker:hover { opacity: 1; text-decoration: none; }
 /* Ana sayfa üye logoları: üstüne gelince alt çizgi ve yukarı kalkma yok, yalnızca hafif gölge */
 .mlogo::after { display: none; }
 .mlogo:hover, .mlogo:focus-visible { transform: none; }
+
+/* Fotoğraf yerine şirket logosu (ör. temsilcisi belli olmayan koltuk) */
+.person__photo:has(img[src*="/uyeler/"]), .pboard__av:has(img[src*="/uyeler/"]) { background: #fff; border: 1px solid var(--grey-200); }
+.person .person__photo img[src*="/uyeler/"], .person-lead__photo img[src*="/uyeler/"] { object-fit: contain; object-position: center; padding: 22%; }
+.pboard__av img[src*="/uyeler/"] { object-fit: contain; object-position: center; padding: 14%; }
+
+/* ---------- Sosyal medya simgeleri: üzerine gelince belirgin renk ---------- */
+.topbar .social a { color: #cfd7ec; transition: color .2s, transform .2s; }
+.topbar .social a:hover, .topbar .social a:focus-visible { color: var(--accent); transform: translateY(-1px); }
+.footer .social a { transition: background .25s, border-color .25s, color .25s, transform .25s; }
+.footer .social a:hover, .footer .social a:focus-visible { background: var(--accent); border-color: var(--accent); color: var(--navy-950); transform: translateY(-2px); }
+
+/* ---------- Üyelik: online ön başvuru (solda koyu tanıtım, sağda form) ---------- */
+.apply { display: grid; grid-template-columns: minmax(280px, 5fr) 7fr; border: 1px solid var(--grey-200); box-shadow: var(--shadow); background: var(--white); }
+.apply__intro { position: relative; background: var(--navy-950); color: #c3cbe0; padding: clamp(32px, 4vw, 56px); display: flex; flex-direction: column; gap: 4px; border-top: 3px solid var(--accent); }
+.apply__intro .eyebrow { color: var(--accent); }
+.apply__intro h2 { color: var(--white); margin-top: 6px; }
+.apply__intro p { color: #c3cbe0; max-width: 44ch; }
+.apply__contact { margin-top: auto; padding-top: 28px; display: grid; gap: 10px; border-top: 1px solid rgba(255,255,255,.12); }
+.apply__contact span { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8d97b3; }
+.apply__contact a { display: inline-flex; align-items: center; gap: 10px; color: var(--white); font-weight: 500; }
+.apply__contact a:hover { color: var(--accent); text-decoration: none; }
+.apply__contact svg { width: 16px; height: 16px; fill: none; stroke: var(--accent); stroke-width: 2; flex: none; }
+.apply__doc { margin-top: 18px; color: var(--accent); font-weight: 600; font-size: .9rem; }
+.apply__form { padding: clamp(28px, 4vw, 56px); align-content: start; }
+.apply > * { min-width: 0; }
+@media (max-width: 900px) { .apply { grid-template-columns: minmax(0, 1fr); } .apply__contact { margin-top: 18px; } }
+@media (max-width: 560px) { .apply__form { grid-template-columns: minmax(0, 1fr); } .apply__form > * { min-width: 0; } }
+
+/* ---------- İletişim: harita yalnızca çerez onayıyla yüklenir ---------- */
+.map-card iframe { height: 100%; }
+.map-card--off { display: grid; place-items: center; background: linear-gradient(160deg, var(--grey-50), var(--grey-100)); }
+.map-card__consent { max-width: 460px; padding: 24px; text-align: center; display: grid; justify-items: center; gap: 14px; }
+.map-card__consent svg { width: 34px; height: 34px; fill: none; stroke: var(--navy); stroke-width: 1.6; }
+.map-card__consent p { margin: 0; color: var(--ink-2); font-size: .92rem; }
+
+/* ---------- Yasal metinler: tablo ---------- */
+.legal-text h2 { font-size: 1.25rem; margin-top: 1.8em; }
+.legal-text table { width: 100%; border-collapse: collapse; margin: 0 0 1.2em; font-size: .9rem; display: block; overflow-x: auto; }
+.legal-text th, .legal-text td { text-align: left; vertical-align: top; padding: 10px 12px; border: 1px solid var(--grey-200); }
+.legal-text th { background: var(--grey-100); color: var(--navy-950); font-weight: 600; }
+@media (max-width: 767px) { .apply__intro { text-align: center; } .apply__intro p { margin-inline: auto; } .apply__contact { justify-items: center; } }
+
+/* ---------- Çerez onayı bandı ---------- */
+.cookie-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--navy-950); color: #c3cbe0; border-top: 3px solid var(--accent); box-shadow: 0 -10px 30px rgba(12,22,56,.25); }
+.cookie-bar[hidden] { display: none; }
+.cookie-bar__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 18px; padding-bottom: 18px; }
+.cookie-bar p { margin: 0; font-size: .9rem; line-height: 1.55; max-width: 820px; }
+.cookie-bar p a { color: var(--white); text-decoration: underline; text-underline-offset: 2px; }
+.cookie-bar p a:hover { color: var(--accent); }
+.cookie-bar__actions { display: flex; gap: 10px; flex: none; }
+.cookie-bar .btn { padding: 11px 20px; font-size: .88rem; }
+@media (max-width: 760px) { .cookie-bar__inner { flex-direction: column; align-items: stretch; gap: 14px; } .cookie-bar__actions .btn { flex: 1; justify-content: center; } }
+.map-card__consent a { font-weight: 600; font-size: .9rem; }
+.cookie-bar .btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.55); color: var(--white); }
+.cookie-bar .btn--ghost:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+.cookie-bar .btn--gold { border: 1px solid var(--accent); }
+
+/* Çerez bandı: ince ve sade */
+.cookie-bar { background: rgba(12,22,56,.96); border-top: 1px solid rgba(201,162,39,.45); box-shadow: 0 -4px 16px rgba(12,22,56,.12); backdrop-filter: blur(6px); }
+.cookie-bar__inner { padding-top: 10px; padding-bottom: 10px; gap: 18px; }
+.cookie-bar p { font-size: .8rem; line-height: 1.5; color: #b9c2da; }
+.cookie-bar p a { color: #dfe4f2; text-decoration-color: rgba(255,255,255,.35); }
+.cookie-bar__actions { gap: 8px; }
+.cookie-bar .btn { padding: 6px 14px; font-size: .78rem; font-weight: 600; }
+.cookie-bar .btn--ghost { border-color: rgba(255,255,255,.3); color: #dfe4f2; }
+@media (max-width: 760px) { .cookie-bar__inner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 12px; } .cookie-bar p { flex: 1 1 100%; } .cookie-bar__actions { margin-left: auto; } .cookie-bar__actions .btn { flex: none; } }
+.legal-text table { display: table; }
+@media (max-width: 640px) { .legal-text table { display: block; } }
+/* Telefonda footer sade: yalnızca logo/tanıtım/sosyal medya ve iletişim sütunu */
+@media (max-width: 767px) { .footer__grid > div:not(.footer__brand):not(:last-child) { display: none; } }
+/* Telefonda footer iletişim: simge üstte, yazı altta; hepsi aynı eksende ortalı */
+@media (max-width: 767px) { .footer__contact li { flex-direction: column; align-items: center; gap: 6px; text-align: center; } .footer__contact svg { margin-top: 0; } }
